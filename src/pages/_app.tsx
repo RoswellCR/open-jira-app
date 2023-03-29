@@ -1,27 +1,22 @@
-import { ReactElement, ReactNode } from 'react';
-import { NextPage } from 'next';
-import { AppProps } from 'next/app';
 
 import '../styles/globals.css'
+import { AppProps } from 'next/app';
 
-type NextPageWithLayout = NextPage & {
-  getLayout?: (page : ReactElement) => ReactNode;
-}
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { lightTheme, darkTheme } from '../themes';
 
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout
-}
 
-function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
-  const getLayout = Component.getLayout || ((page) => page );
 
-  // return (
-  //   <>
-  //     <Component {...pageProps} />
-  //   </>
-  // )
-  return getLayout( <Component {...pageProps} /> )
+function MyApp({ Component, pageProps }: AppProps) {
+
+ return (
+    <ThemeProvider theme={lightTheme}>
+      <CssBaseline/>
+      <Component {...pageProps} />
+    </ThemeProvider>
+  )
+ 
 }
 
 export default MyApp
